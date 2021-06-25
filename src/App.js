@@ -1,24 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Suspense } from 'react';
+import{ Redirect, Route, Switch } from 'react-router-dom';
+
+import Layout from './components/layout/Layout';
+import LoadingSpinner from './components/UI/LoadingSpinner';
+
+const AddQuote = React.lazy(() => import("./pages/AddQuote"));
+const QuoteDetail = React.lazy(() => import("./pages/QuoteDetail"));
+const NotFound = React.lazy(() => import("./pages/NotFound"));
+const Quotes = React.lazy(() => import("./pages/Quotes"));
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Suspense fallback={<div className="centered"> <LoadingSpinner/> </div>}>
+      <Layout>
+        <Switch>
+          <Route path="/" exact>
+            <Redirect to="/quotes"/>
+          </Route>
+          <Route path="/quotes" exact>
+            <Quotes/>
+          </Route>
+          <Route path="/quotes/:quoteId">
+            <QuoteDetail/>
+          </Route>
+          <Route path="/add-quote" exact>
+            <AddQuote/>
+          </Route>
+          <Route path="*">
+            <NotFound/>
+          </Route>
+        </Switch>
+      </Layout>
+      </Suspense>
   );
 }
 
