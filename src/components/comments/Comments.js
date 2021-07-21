@@ -13,8 +13,10 @@ const Comments = () => {
   const {quoteId} = params;
   const { sendRequest , status, data: loadedComments} = useHttp(getComments);
 
+
+  //for page reload when we add a new comment
   const addedCommentHandler = useCallback(() => {
-    sendRequest(quoteId)
+    sendRequest(quoteId);
   },[quoteId, sendRequest])
 
   useEffect(() => {
