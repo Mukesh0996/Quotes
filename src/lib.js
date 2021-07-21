@@ -1,4 +1,4 @@
-const FIREBASE_URL = "https://quotes-a9bc5-default-rtdb.firebaseio.com/";
+const FIREBASE_URL = "https://oneq-695f9-default-rtdb.firebaseio.com/";
 
 export const getAllQuotes = async() => {
     const response = await fetch(`${FIREBASE_URL}/quotes.json`);
