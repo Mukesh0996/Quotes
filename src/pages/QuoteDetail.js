@@ -13,7 +13,7 @@ const QuoteDetail = () => {
     const match = useRouteMatch();  
     const {quoteId} = params;
     const { sendRequest, status, data: loadedQuote } = useHttp(getSingleQuote)
-    
+    console.log("match", match)
     useEffect(() => {
         sendRequest(quoteId);
     },[sendRequest, quoteId])
